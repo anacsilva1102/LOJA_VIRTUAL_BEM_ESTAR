@@ -1,0 +1,108 @@
+
+<header class="cabecalho">
+    <div class="logo">
+      <h1>Minha Loja</h1>
+      <p>Estética & Bem-Estar</p>
+    </div>
+  
+    <nav>
+      <a routerLink="/">Início</a>
+      <a routerLink="/" fragment="produtos">Produtos</a>
+      <a routerLink="/" fragment="servicos">Serviços</a>
+      <a routerLink="/cadastro">Cadastro</a>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="catalogo">
+      <h2>Cadastro de clientes</h2>
+      <p>Preencha seus dados para se cadastrar em nossa loja.</p>
+  
+      <form class="formulario-cliente" (ngSubmit)="cadastrarCliente()">
+        <div class="campo-cliente">
+          <label for="nomeCliente">Nome completo</label>
+          <input id="nomeCliente" name="nomeCliente" [(ngModel)]="cliente.nome" required>
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="cpfCliente">CPF</label>
+          <input id="cpfCliente" name="cpfCliente" [(ngModel)]="cliente.cpf" maxlength="14" required>
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="nascimentoCliente">Data de nascimento</label>
+          <input type="date" id="nascimentoCliente" name="nascimentoCliente" [(ngModel)]="cliente.dataNascimento" required>
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="sexoCliente">Sexo</label>
+          <select id="sexoCliente" name="sexoCliente" [(ngModel)]="cliente.sexo" required>
+            <option value="">Selecione</option>
+            <option value="F">Feminino</option>
+            <option value="M">Masculino</option>
+            <option value="O">Outro</option>
+          </select>
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="emailCliente">E-mail</label>
+          <input type="email" id="emailCliente" name="emailCliente" [(ngModel)]="cliente.email" required>
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="telefoneCliente">Telefone</label>
+          <input type="tel" id="telefoneCliente" name="telefoneCliente" [(ngModel)]="cliente.telefone" required>
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="cepCliente">CEP</label>
+          <input id="cepCliente" name="cepCliente" [(ngModel)]="cliente.cep" required>
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="logradouroCliente">Rua / Logradouro</label>
+          <input id="logradouroCliente" name="logradouroCliente" [(ngModel)]="cliente.logradouro">
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="numeroCliente">Número</label>
+          <input id="numeroCliente" name="numeroCliente" [(ngModel)]="cliente.numero" required>
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="complementoCliente">Complemento</label>
+          <input id="complementoCliente" name="complementoCliente" [(ngModel)]="cliente.complemento">
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="bairroCliente">Bairro</label>
+          <input id="bairroCliente" name="bairroCliente" [(ngModel)]="cliente.bairro">
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="cidadeCliente">Cidade</label>
+          <input id="cidadeCliente" name="cidadeCliente" [(ngModel)]="cliente.cidade">
+        </div>
+  
+        <div class="campo-cliente">
+          <label for="ufCliente">Estado (UF)</label>
+          <input id="ufCliente" name="ufCliente" [(ngModel)]="cliente.uf" maxlength="2">
+        </div>
+  
+        <div class="acoes-cliente">
+          <button type="submit" class="botao">Cadastrar</button>
+          <button type="button" class="botao" (click)="limparCliente()">Limpar</button>
+          <a routerLink="/" class="botao">Voltar à loja</a>
+        </div>
+  
+        @if (mensagemCliente) {
+          <p>{{ mensagemCliente }}</p>
+        }
+      </form>
+    </section>
+  </main>
+  
+  <footer>
+    <p>Minha Loja | Estética & Bem-Estar</p>
+  </footer>
+  
