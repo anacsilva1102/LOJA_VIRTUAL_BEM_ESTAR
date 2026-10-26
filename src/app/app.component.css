@@ -1,0 +1,304 @@
+:host {
+  display: block;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #4b2635;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 18px 7%;
+  background: #ffffff;
+  border-bottom: 1px solid #f0e8eb;
+}
+
+.logo h1 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 29px;
+  font-weight: normal;
+  color: #754456;
+}
+
+.logo p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #997483;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+nav a {
+  color: #694253;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #a66f83;
+}
+
+.destaque {
+  min-height: 360px;
+  padding: 65px 10%;
+  display: flex;
+  align-items: center;
+  background: #fbf5f7;
+}
+
+.destaque > div {
+  max-width: 580px;
+}
+
+.subtitulo {
+  margin-bottom: 15px;
+  color: #a66f83;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.destaque h2 {
+  margin: 0 0 18px;
+  color: #624653;
+  font-family: Georgia, serif;
+  font-size: 46px;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.destaque > div > p:not(.subtitulo) {
+  max-width: 440px;
+  margin-bottom: 25px;
+  color: #786670;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.botao {
+  display: inline-block;
+  padding: 13px 23px;
+  border-radius: 6px;
+  background: #a66f83;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.botao:hover {
+  background: #89576a;
+}
+
+.catalogo {
+  padding: 65px 7%;
+  background: #ffffff;
+  text-align: center;
+}
+
+.catalogo h2 {
+  margin: 0 0 12px;
+  color: #624653;
+  font-family: Georgia, serif;
+  font-size: 34px;
+  font-weight: normal;
+}
+
+.catalogo > p {
+  margin-bottom: 30px;
+  color: #876779;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.pesquisa {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  max-width: 850px;
+  margin: 0 auto 35px;
+}
+
+.pesquisa input,
+.pesquisa select {
+  min-width: 0;
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #e8dce1;
+  border-radius: 6px;
+  outline: none;
+  background: #ffffff;
+  color: #694253;
+  font-size: 14px;
+}
+
+.pesquisa input:focus,
+.pesquisa select:focus {
+  border-color: #a66f83;
+}
+
+.pesquisa button {
+  padding: 13px 22px;
+  border: none;
+  border-radius: 6px;
+  background: #a66f83;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.pesquisa button:hover {
+  background: #89576a;
+}
+
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+  text-align: left;
+}
+
+.produto {
+  overflow: hidden;
+  padding: 18px;
+  border: 1px solid #eee6e9;
+  border-radius: 8px;
+  background: #ffffff;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.produto:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px #62465312;
+}
+
+.imagem-produto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 190px;
+  padding: 20px;
+  border-radius: 6px;
+  background: #f8e9ee;
+  color: #89576a;
+  font-family: Georgia, serif;
+  font-size: 19px;
+  text-align: center;
+}
+
+.produto h3 {
+  margin: 18px 0 10px;
+  color: #624653;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: normal;
+}
+
+.produto p {
+  margin: 0;
+  color: #876779;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+#servicos {
+  background: #faf5f7;
+}
+
+footer {
+  padding: 28px 7%;
+  background: #754456;
+  color: #ffffff;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+@media (max-width: 900px) {
+  .cabecalho {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .destaque h2 {
+    font-size: 38px;
+  }
+
+  .produtos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .cabecalho {
+    padding: 20px;
+  }
+
+  nav {
+    gap: 14px;
+  }
+
+  nav a {
+    font-size: 13px;
+  }
+
+  .destaque {
+    min-height: 300px;
+    padding: 45px 7%;
+  }
+
+  .destaque h2 {
+    font-size: 33px;
+  }
+
+  .catalogo {
+    padding: 45px 5%;
+  }
+
+  .catalogo h2 {
+    font-size: 29px;
+  }
+
+  .pesquisa {
+    flex-direction: column;
+  }
+
+  .pesquisa button {
+    width: 100%;
+  }
+
+  .produtos {
+    grid-template-columns: 1fr;
+  }
+
+  .imagem-produto {
+    min-height: 180px;
+  }
+}
