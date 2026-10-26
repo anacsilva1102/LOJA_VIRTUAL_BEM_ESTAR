@@ -33,6 +33,8 @@ export class CadastroComponent {
   constructor(private pessoaEnderecoService: PessoaEnderecoService) {}
 
   cadastrarCliente(): void {
+    this.mensagemCliente = '';
+
     const camposObrigatorios = [
       this.cliente.nome,
       this.cliente.cpf,
@@ -58,18 +60,18 @@ export class CadastroComponent {
     }
 
     const dados = {
-      nome: this.cliente.nome,
+      nome: this.cliente.nome.trim(),
       cpf,
       dataNascimento: this.cliente.dataNascimento,
       sexo: this.cliente.sexo,
-      email: this.cliente.email,
+      email: this.cliente.email.trim(),
       telefone,
       ativoPessoa: 'S',
       enderecos: [
         {
-          cep: this.cliente.cep,
-          numero: this.cliente.numero,
-          complemento: this.cliente.complemento
+          cep: this.cliente.cep.replace(/\D/g, ''),
+          numero: this.cliente.numero.trim(),
+          complemento: this.cliente.complemento.trim()
         }
       ]
     };
@@ -81,7 +83,13 @@ export class CadastroComponent {
       },
       error: erro => {
         console.error('Erro ao cadastrar cliente:', erro);
-        this.mensagemCliente = 'Não foi possível realizar o cadastro.';
+        console.error('Detalhes retornados pela API:', erro.error);
+
+        this.mensagemCliente =
+          typeof erro.error === 'string'
+            ? erro.error
+            : erro.error?.message ||
+              'Não foi possível realizar o cadastro. Confira o terminal da API.';
       }
     });
   }
