@@ -1,106 +1,142 @@
 
 <header class="cabecalho">
-    <div class="logo">
-      <h1>Minha Loja</h1>
-      <p>Estética & Bem-Estar</p>
-    </div>
-  
-   
-<nav>
-    <a routerLink="/">Início</a>
-    <a href="/#produtos">Produtos</a>
-    <a href="/#servicos">Serviços</a>
+  <div class="logo">
+    <h1>Minha Loja</h1>
+    <p>Estética & Bem-Estar</p>
+  </div>
+
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#servicos">Serviços</a>
     <a routerLink="/cadastro">Cadastro</a>
-    <a href="/#carrinho">Carrinho</a>
+    <a href="#carrinho">Carrinho</a>
   </nav>
-  
-  </header>
-  
-  <main>
-    <section class="destaque" id="inicio">
-      <div>
-        <p class="subtitulo">CUIDE DE VOCÊ</p>
-        <h2>Beleza, cuidado e bem-estar em um só lugar.</h2>
-        <p>Encontre produtos e serviços preparados para valorizar o seu bem-estar.</p>
-        <a href="#produtos" class="botao">Conheça nossa loja</a>
-      </div>
-    </section>
-  
-    <section class="catalogo" id="produtos">
-      <h2>Nossos produtos</h2>
-      <p>Confira os produtos disponíveis em nossa loja.</p>
-  
-      <div class="pesquisa">
-        <input
-          type="text"
-          placeholder="Pesquisar produto ou serviço"
-          [ngModel]="pesquisa()"
-          (ngModelChange)="pesquisa.set($event)"
-        >
-  
-        <select
-          [ngModel]="categoriaSelecionada()"
-          (ngModelChange)="categoriaSelecionada.set($event)"
-        >
-          <option value="">Todas as categorias</option>
-          <option value="pele">Cuidados com a pele</option>
-          <option value="cabelo">Cuidados com o cabelo</option>
-          <option value="corpo">Cuidados com o corpo</option>
-        </select>
-  
-        <button type="button" (click)="pesquisa.set(pesquisa().trim())">
-          Pesquisar
-        </button>
-      </div>
-  
+</header>
+
+<main>
+  <section class="destaque" id="inicio">
+    <div>
+      <p class="subtitulo">CUIDE DE VOCÊ</p>
+      <h2>Beleza, cuidado e bem-estar em um só lugar.</h2>
+      <p>Encontre produtos e serviços preparados para valorizar o seu bem-estar.</p>
+      <a href="#produtos" class="botao">Conheça nossa loja</a>
+    </div>
+  </section>
+
+  <section class="catalogo" id="produtos">
+    <h2>Nossos produtos</h2>
+    <p>Encontre os produtos ideais para seus cuidados diários.</p>
+
+    <div class="pesquisa">
+      <input
+        type="text"
+        placeholder="Pesquisar produto"
+        [ngModel]="pesquisa()"
+        (ngModelChange)="pesquisa.set($event)"
+      >
+
+      <select
+        [ngModel]="categoriaSelecionada()"
+        (ngModelChange)="categoriaSelecionada.set($event)"
+      >
+        <option value="">Todas as categorias</option>
+        <option value="pele">Cuidados com a pele</option>
+        <option value="cabelo">Cuidados com o cabelo</option>
+        <option value="corpo">Cuidados com o corpo</option>
+      </select>
+    </div>
+
+    @if (mensagemErro) {
+      <p>{{ mensagemErro }}</p>
+    }
+
+    <div class="produtos">
+      @for (produto of produtosFiltrados(); track produto.idItem) {
+        <div class="produto">
+          <div class="imagem-produto">{{ produto.item }}</div>
+          <h3>{{ produto.item }}</h3>
+          <p>{{ produto.descricaoItem }}</p>
+          <p class="preco">
+            R$ {{ obterPreco(produto).toFixed(2) }}
+          </p>
+          <button
+            type="button"
+            class="botao"
+            (click)="adicionarEIrParaCarrinho(produto)"
+          >
+            Comprar
+          </button>
+        </div>
+      } @empty {
+        <p>Nenhum produto encontrado.</p>
+      }
+    </div>
+  </section>
+
+  <section class="catalogo" id="servicos">
+    <h2>Nossos serviços</h2>
+    <p>Conheça os serviços de estética e bem-estar disponíveis.</p>
+
+    <div class="produtos">
+      @for (servico of servicosDisponiveis(); track servico.idItem) {
+        <div class="produto">
+          <h3>{{ servico.item }}</h3>
+          <p>{{ servico.descricaoItem }}</p>
+          <p class="preco">
+            R$ {{ obterPreco(servico).toFixed(2) }}
+          </p>
+          <button
+            type="button"
+            class="botao"
+            (click)="adicionarEIrParaCarrinho(servico)"
+          >
+            Contratar serviço
+          </button>
+        </div>
+      } @empty {
+        <p>Nenhum serviço disponível no momento.</p>
+      }
+    </div>
+  </section>
+
+  <section class="catalogo" id="carrinho">
+    <h2>Meu carrinho</h2>
+    <p>Confira os produtos e serviços que você adicionou.</p>
+
+    @if (mensagemCarrinho) {
+      <p>{{ mensagemCarrinho }}</p>
+    }
+
+    @if (carrinho().length > 0) {
       <div class="produtos">
-        @for (produto of produtosFiltrados(); track produto.idItem) {
+        @for (item of carrinho(); track $index) {
           <div class="produto">
-            <div class="imagem-produto">{{ produto.item }}</div>
-            <h3>{{ produto.item }}</h3>
-            <p>{{ produto.descricaoItem }}</p>
-            <p class="preco">R$ {{ produto.precoItem }}</p>
-            <button type="button" class="botao" (click)="adicionarAoCarrinho(produto)">
-              Adicionar ao carrinho
+            <h3>{{ item.item }}</h3>
+            <p>{{ item.descricaoItem }}</p>
+            <p class="preco">
+              R$ {{ obterPreco(item).toFixed(2) }}
+            </p>
+            <button
+              type="button"
+              class="botao"
+              (click)="removerDoCarrinho($index)"
+            >
+              Remover
             </button>
           </div>
-        } @empty {
-          <p>Nenhum produto encontrado.</p>
         }
       </div>
-    </section>
-  
-    <section class="catalogo" id="carrinho">
-      <h2>Meu carrinho</h2>
-      <p>Confira os produtos que você adicionou.</p>
-  
-      @if (carrinho().length > 0) {
-        <div class="produtos">
-          @for (produto of carrinho(); track $index) {
-            <div class="produto">
-              <h3>{{ produto.item }}</h3>
-              <p>{{ produto.descricaoItem }}</p>
-              <p class="preco">R$ {{ produto.precoItem }}</p>
-              <button type="button" class="botao" (click)="removerDoCarrinho($index)">
-                Remover
-              </button>
-            </div>
-          }
-        </div>
-  
-        <h3 class="total-carrinho">Total: R$ {{ totalCarrinho().toFixed(2) }}</h3>
-      } @else {
-        <p>Seu carrinho está vazio.</p>
-      }
-    </section>
-  
-    <section class="catalogo" id="servicos">
-      <h2>Nossos serviços</h2>
-      <p>Conheça os serviços de estética e bem-estar disponíveis.</p>
-    </section>
-  </main>
-  
-  <footer>
-    <p>Minha Loja | Estética & Bem-Estar</p>
-  </footer>
-  
+
+      <h3 class="total-carrinho">
+        Total: R$ {{ totalCarrinho().toFixed(2) }}
+      </h3>
+    } @else {
+      <p>Seu carrinho está vazio.</p>
+    }
+  </section>
+</main>
+
+<footer>
+  <p>Minha Loja | Estética & Bem-Estar</p>
+</footer>

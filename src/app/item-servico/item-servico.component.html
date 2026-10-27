@@ -1,0 +1,50 @@
+
+<header class="cabecalho">
+    <div class="logo">
+      <h1>Minha Loja</h1>
+      <p>Estética & Bem-Estar</p>
+    </div>
+  
+    <nav>
+      <a routerLink="/inicio">Início</a>
+      <a routerLink="/produtos">Produtos</a>
+      <a routerLink="/item-servico">Serviços</a>
+      <a routerLink="/cadastro">Cadastro</a>
+      <a routerLink="/carrinho">Carrinho</a>
+    </nav>
+  </header>
+  
+  <main class="catalogo">
+    <h2>Nossos serviços</h2>
+    <p>Conheça nossos serviços de estética e bem-estar.</p>
+  
+    @if (mensagemErro) {
+      <p class="erro">{{ mensagemErro }}</p>
+    }
+  
+    <div class="produtos">
+      @for (servico of servicos(); track servico.idItem) {
+        <article class="produto">
+          <h3>{{ servico.item }}</h3>
+          <p>{{ servico.descricaoItem }}</p>
+  
+          <p class="preco">
+            R$ {{ obterPreco(servico).toFixed(2) }}
+          </p>
+  
+          <button class="botao-agendar" (click)="agendar(servico)">
+            Agendar
+          </button>
+        </article>
+      } @empty {
+        @if (!mensagemErro) {
+          <p>Nenhum serviço disponível no momento.</p>
+        }
+      }
+    </div>
+  </main>
+  
+  <footer>
+    <p>Minha Loja | Estética & Bem-Estar</p>
+  </footer>
+  

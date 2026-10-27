@@ -1,0 +1,165 @@
+<header class="cabecalho">
+  <div class="logo">
+    <h1>Minha Loja</h1>
+    <p>Estética & Bem-Estar</p>
+  </div>
+
+  <nav>
+    <a routerLink="/inicio">Início</a>
+    <a routerLink="/produtos">Produtos</a>
+    <a routerLink="/item-servico">Serviços</a>
+    <a routerLink="/cadastro">Cadastro</a>
+    <a routerLink="/carrinho">Carrinho</a>
+  </nav>
+</header>
+
+<main class="catalogo">
+  <h2>Meu carrinho</h2>
+  <p>Confira os produtos e serviços selecionados.</p>
+
+  @if (mensagem) {
+    <p class="mensagem">{{ mensagem }}</p>
+  }
+
+  @if (carrinho().length > 0) {
+    <div class="conteudo-carrinho">
+      <section class="lista-carrinho">
+        @for (item of carrinho(); track $index) {
+          <article class="item-carrinho">
+            <div class="informacoes-item">
+              <h3>{{ item.item }}</h3>
+              <p>{{ item.descricaoItem }}</p>
+              <span class="tipo-item">
+                {{ item.tipoItem === 'S' ? 'Serviço' : 'Produto' }}
+              </span>
+            </div>
+
+            <div class="preco-item">
+              <span>Preço unitário</span>
+              <strong>R$ {{ obterPreco(item).toFixed(2) }}</strong>
+            </div>
+
+            <div class="quantidade-item">
+              <label [for]="'quantidade-' + $index">Quantidade</label>
+              <input
+                [id]="'quantidade-' + $index"
+                type="number"
+                min="1"
+                step="1"
+                [ngModel]="item.quantidade"
+                (ngModelChange)="alterarQuantidade($index, +$event)"
+              />
+            </div>
+
+            <div class="subtotal-item">
+              <span>Subtotal</span>
+              <strong>
+                R$ {{ (obterPreco(item) * item.quantidade).toFixed(2) }}
+              </strong>
+            </div>
+
+            <button
+              type="button"
+              class="botao-remover"
+              (click)="removerDoCarrinho($index)">
+              Remover
+            </button>
+          </article>
+        }
+      </section>
+
+      <aside class="resumo">
+        <h3>Resumo do pedido</h3>
+
+        <label for="cep">CEP de entrega</label>
+        <input
+          id="cep"
+          type="text"
+          name="cep"
+          placeholder="00000-000"
+          maxlength="9"
+          [(ngModel)]="cep"
+        />
+
+        <div class="linha-resumo">
+          <span>Valor dos itens</span>
+          <strong>R$ {{ totalCarrinho().toFixed(2) }}</strong>
+        </div>
+
+        <div class="linha-resumo">
+          <span>Valor do frete</span>
+          <strong>R$ {{ obterFrete().toFixed(2) }}</strong>
+        </div>
+
+        <div class="linha-resumo total-pagar">
+          <span>Total a pagar</span>
+          <strong>R$ {{ totalPagar().toFixed(2) }}</strong>
+        </div>
+
+        <fieldset class="pagamento">
+          <legend>Forma de pagamento</legend>
+
+          <label>
+            <input
+              type="radio"
+              name="formaPagamento"
+              value="PIX"
+              [(ngModel)]="formaPagamento"
+            />
+            Pix
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="formaPagamento"
+              value="DEBITO"
+              [(ngModel)]="formaPagamento"
+            />
+            Débito
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="formaPagamento"
+              value="CREDITO"
+              [(ngModel)]="formaPagamento"
+            />
+            Crédito
+          </label>
+        </fieldset>
+
+        <button
+          type="button"
+          class="botao-finalizar"
+          (click)="finalizarAgendamento()">
+          Finalizar compra
+        </button>
+
+        <button
+          type="button"
+          class="botao-continuar"
+          (click)="continuarComprando()">
+          Continuar comprando
+        </button>
+      </aside>
+    </div>
+  } @else {
+    <div class="carrinho-vazio">
+      <h3>Seu carrinho está vazio</h3>
+      <p>Adicione produtos ou serviços para continuar.</p>
+
+      <button
+        type="button"
+        class="botao-continuar"
+        (click)="continuarComprando()">
+        Ver produtos
+      </button>
+    </div>
+  }
+</main>
+
+<footer>
+  <p>Minha Loja | Estética & Bem-Estar</p>
+</footer>
