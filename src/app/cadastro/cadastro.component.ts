@@ -29,6 +29,7 @@ export class CadastroComponent {
   };
 
   mensagemCliente = '';
+  idPessoaCadastrada: number | null = null;
 
   constructor(private pessoaEnderecoService: PessoaEnderecoService) {}
 
@@ -77,9 +78,24 @@ export class CadastroComponent {
     };
 
     this.pessoaEnderecoService.cadastrarPessoa(dados).subscribe({
-      next: () => {
+      next: (resposta) => {
+        const id = Number(resposta?.idPessoa);
+
+        this.idPessoaCadastrada =
+          Number.isInteger(id) && id > 0 ? id : null;
+
+        if (this.idPessoaCadastrada !== null) {
+          localStorage.setItem(
+            'idPessoa',
+            String(this.idPessoaCadastrada)
+          );
+        }
+
         this.limparCliente();
-        this.mensagemCliente = 'Cadastro realizado com sucesso!';
+
+        this.mensagemCliente = this.idPessoaCadastrada !== null
+          ? `Cadastro realizado com sucesso! Código do cliente: ${this.idPessoaCadastrada}`
+          : 'Cadastro realizado com sucesso!';
       },
       error: erro => {
         console.error('Erro ao cadastrar cliente:', erro);
