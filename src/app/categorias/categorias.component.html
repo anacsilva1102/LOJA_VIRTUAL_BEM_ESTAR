@@ -1,0 +1,118 @@
+
+<div class="pagina-categorias">
+    <header class="cabecalho">
+      <div>
+        <h1>Categorias</h1>
+        <p>Gerencie as categorias da loja.</p>
+      </div>
+  
+      <a routerLink="/painel-administrativo" class="botao-voltar">
+        Voltar ao painel
+      </a>
+    </header>
+  
+    <section class="cartao formulario">
+      <h2>{{ idEdicao !== null ? 'Editar categoria' : 'Nova categoria' }}</h2>
+  
+      <form (ngSubmit)="salvarCategoria()">
+        <label for="categoria">Nome da categoria</label>
+  
+        <input
+          id="categoria"
+          type="text"
+          name="categoria"
+          [(ngModel)]="nomeCategoria"
+          placeholder="Digite o nome da categoria"
+          maxlength="100"
+          required
+        >
+  
+        <div class="acoes">
+          <button type="submit" class="botao-principal">
+            {{ idEdicao !== null ? 'Salvar alterações' : 'Cadastrar categoria' }}
+          </button>
+  
+          <button
+            *ngIf="idEdicao !== null"
+            type="button"
+            class="botao-secundario"
+            (click)="cancelarEdicao()"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </section>
+  
+    <section class="cartao consulta">
+      <h2>Consultar categoria</h2>
+  
+      <div class="linha-consulta">
+        <input
+          type="number"
+          [(ngModel)]="idBusca"
+          placeholder="Digite o ID"
+          min="1"
+        >
+  
+        <button type="button" class="botao-principal" (click)="consultarPorId()">
+          Consultar
+        </button>
+  
+        <button type="button" class="botao-secundario" (click)="listarCategorias()">
+          Listar todas
+        </button>
+      </div>
+    </section>
+  
+    <p *ngIf="mensagem" class="mensagem sucesso">{{ mensagem }}</p>
+    <p *ngIf="erro" class="mensagem erro">{{ erro }}</p>
+    <p *ngIf="carregando" class="mensagem">Carregando categorias...</p>
+  
+    <section class="cartao tabela-cartao">
+      <h2>Categorias cadastradas</h2>
+  
+      <div class="tabela-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Categoria</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr *ngFor="let categoria of categorias">
+              <td>{{ categoria.idcategoria }}</td>
+              <td>{{ categoria.categoria }}</td>
+              <td class="acoes-tabela">
+                <button
+                  type="button"
+                  class="botao-editar"
+                  (click)="editar(categoria)"
+                >
+                  Editar
+                </button>
+  
+                <button
+                  type="button"
+                  class="botao-excluir"
+                  (click)="excluir(categoria)"
+                >
+                  Excluir
+                </button>
+              </td>
+            </tr>
+  
+            <tr *ngIf="!carregando && categorias.length === 0">
+              <td colspan="3" class="vazio">
+                Nenhuma categoria encontrada.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+  

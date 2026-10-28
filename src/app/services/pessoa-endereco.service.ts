@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,5 +12,13 @@ export class PessoaEnderecoService {
 
   cadastrarPessoa(dados: any): Observable<any> {
     return this.http.post(this.apiUrl, dados);
+  }
+
+  listarPessoas(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  consultarPessoaPorId(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 }

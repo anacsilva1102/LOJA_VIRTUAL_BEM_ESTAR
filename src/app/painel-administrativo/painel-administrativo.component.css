@@ -1,0 +1,111 @@
+.painel {
+    min-height: 100vh;
+    background: #fff7fa;
+    color: #59434c;
+  }
+  
+  .cabecalho {
+    min-height: 85px;
+    padding: 20px 7%;
+    background: #ffffff;
+    border-bottom: 1px solid #f0dce4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .marca {
+    color: #b56b88;
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  .marca span {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  
+  .cabecalho h1 {
+    margin: 0;
+    color: #b56b88;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+  }
+  
+  .conteudo {
+    width: min(900px, 86%);
+    margin: 40px auto;
+  }
+  
+  .conteudo h2 {
+    margin-bottom: 8px;
+    color: #b56b88;
+    font-size: 28px;
+  }
+  
+  .subtitulo {
+    margin-bottom: 28px;
+    color: #806b74;
+  }
+  
+  .lista-opcoes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  
+  .cartao {
+    min-height: 105px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: #ffffff;
+    border: 1px solid #f0dce4;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .cartao:hover {
+    border-color: #b56b88;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px #b56b8818;
+  }
+  
+  .cartao h3 {
+    margin: 0 0 8px;
+    color: #b56b88;
+    font-size: 17px;
+  }
+  
+  .cartao p {
+    margin: 0;
+    color: #806b74;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .seta {
+    color: #b56b88;
+    font-size: 30px;
+  }
+  
+  @media (max-width: 650px) {
+    .cabecalho {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  
+    .lista-opcoes {
+      grid-template-columns: 1fr;
+    }
+  
+    .conteudo {
+      margin: 28px auto;
+    }
+  }

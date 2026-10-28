@@ -1,0 +1,23 @@
+<main class="painel">
+    <header class="cabecalho">
+      <a routerLink="/inicio" class="marca">Minha Loja <span>| Estética & Bem-Estar</span></a>
+      <h1>ADMINISTRAÇÃO</h1>
+    </header>
+  
+    <section class="conteudo">
+      <h2>Painel administrativo</h2>
+      <p class="subtitulo">Selecione uma opção para gerenciar sua loja.</p>
+  
+      <div class="lista-opcoes">
+        @for (opcao of opcoes; track opcao.titulo) {
+          <a class="cartao" [routerLink]="opcao.rota">
+            <div class="detalhes">
+              <h3>{{ opcao.titulo }}</h3>
+              <p>{{ opcao.descricao }}</p>
+            </div>
+            <span class="seta">›</span>
+          </a>
+        }
+      </div>
+    </section>
+  </main>

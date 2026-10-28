@@ -1,0 +1,61 @@
+<main class="pagina-clientes">
+    <header class="cabecalho">
+      <a routerLink="/painel-administrativo" class="voltar">← Painel administrativo</a>
+      <h1>Clientes</h1>
+      <p>Consulte os clientes cadastrados na loja.</p>
+    </header>
+  
+    <section class="conteudo">
+      <div class="busca">
+        <input
+          type="number"
+          [(ngModel)]="idBusca"
+          placeholder="Digite o ID do cliente"
+          min="1"
+        >
+        <button type="button" (click)="consultarPorId()">Consultar</button>
+        <button type="button" class="secundario" (click)="limparBusca()">Listar todos</button>
+      </div>
+  
+      @if (carregando) {
+        <p class="mensagem">Carregando clientes...</p>
+      }
+  
+      @if (mensagem) {
+        <p class="mensagem">{{ mensagem }}</p>
+      }
+  
+      <div class="tabela-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (cliente of clientes; track cliente.idPessoa) {
+              <tr>
+                <td>{{ cliente.idPessoa }}</td>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.cpf }}</td>
+                <td>{{ cliente.email }}</td>
+                <td>{{ cliente.telefone }}</td>
+                <td>{{ cliente.ativoPessoa === 'S' ? 'Ativo' : 'Inativo' }}</td>
+              </tr>
+            } @empty {
+              @if (!carregando && !mensagem) {
+                <tr>
+                  <td colspan="6">Nenhum cliente encontrado.</td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
