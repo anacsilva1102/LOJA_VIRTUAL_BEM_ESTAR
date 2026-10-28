@@ -1,0 +1,114 @@
+
+.pagina-pedidos {
+    padding: 30px;
+    color: #4d3540;
+    background: #fff7fa;
+    min-height: 100%;
+  }
+  
+  .cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 25px;
+  }
+  
+  .cabecalho h2 {
+    margin: 0 0 8px;
+    color: #b56b88;
+    font-size: 28px;
+  }
+  
+  .cabecalho p {
+    margin: 0;
+    color: #806773;
+  }
+  
+  button {
+    border: none;
+    border-radius: 8px;
+    padding: 11px 16px;
+    background: #b56b88;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #99536e;
+  }
+  
+  .tabela-container {
+    overflow-x: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(100, 50, 70, 0.08);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #f0dce4;
+    white-space: nowrap;
+  }
+  
+  th {
+    background: #f8e8ef;
+    color: #704456;
+  }
+  
+  select {
+    padding: 8px;
+    border: 1px solid #e0b9c9;
+    border-radius: 6px;
+    background: white;
+    color: #4d3540;
+  }
+  
+  details {
+    cursor: pointer;
+  }
+  
+  .detalhes-itens {
+    padding: 8px;
+    white-space: normal;
+  }
+  
+  .detalhes-itens p {
+    margin: 5px 0;
+  }
+  
+  .mensagem {
+    color: #267447;
+    margin-bottom: 15px;
+  }
+  
+  .erro {
+    color: #b42318;
+    margin-bottom: 15px;
+  }
+  
+  .carregando,
+  .vazio {
+    padding: 25px;
+    text-align: center;
+    color: #806773;
+  }
+  
+  @media (max-width: 700px) {
+    .pagina-pedidos {
+      padding: 16px;
+    }
+  
+    .cabecalho {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+  

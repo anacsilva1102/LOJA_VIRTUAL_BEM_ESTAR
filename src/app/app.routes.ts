@@ -8,6 +8,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { PainelAdministrativoComponent } from './painel-administrativo/painel-administrativo.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -19,5 +20,6 @@ export const routes: Routes = [
   { path: 'painel-administrativo', component: PainelAdministrativoComponent },
   { path: 'clientes', component: ClientesComponent },
   { path: 'categorias', component: CategoriasComponent },
+  { path: 'pedidos', component: PedidosComponent },
   { path: '**', redirectTo: 'inicio' }
 ];
