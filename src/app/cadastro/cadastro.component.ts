@@ -79,14 +79,14 @@ export class CadastroComponent {
 
     this.pessoaEnderecoService.cadastrarPessoa(dados).subscribe({
       next: (resposta) => {
-        const id = Number(resposta?.idPessoa);
+        const id = Number(resposta?.idpessoa ?? resposta?.idPessoa);
 
         this.idPessoaCadastrada =
           Number.isInteger(id) && id > 0 ? id : null;
 
         if (this.idPessoaCadastrada !== null) {
           localStorage.setItem(
-            'idPessoa',
+            'idpessoa',
             String(this.idPessoaCadastrada)
           );
         }
