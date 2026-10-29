@@ -29,12 +29,12 @@ export class PainelAdministrativoComponent {
     {
       titulo: 'Produtos',
       descricao: 'Cadastrar e consultar produtos.',
-      rota: '/produtos'
+      rota: '/gerenciamento-produtos'
     },
     {
       titulo: 'Serviços',
       descricao: 'Cadastrar e consultar serviços.',
-      rota: '/item-servico'
+      rota: '/gerenciamento-servicos'
     },
     {
       titulo: 'Pedidos',

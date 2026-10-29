@@ -1,0 +1,182 @@
+
+<div class="container">
+    <h2>Gerenciamento de Produtos</h2>
+  
+    <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
+    <p class="erro" *ngIf="erro">{{ erro }}</p>
+  
+    <form (ngSubmit)="salvarProduto()">
+      <h3>{{ idEdicao !== null ? 'Editar Produto' : 'Cadastrar Produto' }}</h3>
+  
+      <label for="nomeProduto">Nome do produto</label>
+      <input
+        id="nomeProduto"
+        type="text"
+        name="nomeProduto"
+        [(ngModel)]="nomeProduto"
+        required
+      >
+  
+      <label for="descricaoProduto">Descrição</label>
+      <textarea
+        id="descricaoProduto"
+        name="descricaoProduto"
+        [(ngModel)]="descricaoProduto"
+        required
+      ></textarea>
+  
+      <label for="idCategoria">ID da categoria</label>
+      <input
+        id="idCategoria"
+        type="number"
+        name="idCategoria"
+        [(ngModel)]="idCategoria"
+        min="1"
+        required
+      >
+  
+      <label for="precoItem">Preço do item</label>
+      <input
+        id="precoItem"
+        type="number"
+        name="precoItem"
+        [(ngModel)]="precoItem"
+        min="0"
+        step="0.01"
+        required
+      >
+  
+      <label for="codigoPreco">Código do preço</label>
+      <input
+        id="codigoPreco"
+        type="text"
+        name="codigoPreco"
+        [(ngModel)]="codigoPreco"
+        required
+      >
+  
+      <label for="precoVenda">Preço de venda</label>
+      <input
+        id="precoVenda"
+        type="number"
+        name="precoVenda"
+        [(ngModel)]="precoVenda"
+        min="0"
+        step="0.01"
+        required
+      >
+  
+      <label for="unidade">Unidade</label>
+      <input
+        id="unidade"
+        type="text"
+        name="unidade"
+        [(ngModel)]="unidade"
+        placeholder="Ex.: unidade, pacote"
+        required
+      >
+  
+      <label for="ativoProdutoServico">Situação</label>
+      <select
+        id="ativoProdutoServico"
+        name="ativoProdutoServico"
+        [(ngModel)]="ativoProdutoServico"
+        required
+      >
+        <option value="S">Ativo</option>
+        <option value="N">Inativo</option>
+      </select>
+  
+      <div class="botoes">
+        <button type="submit">
+          {{ idEdicao !== null ? 'Salvar alterações' : 'Cadastrar produto' }}
+        </button>
+  
+        <button type="button" class="secundario" (click)="limparFormulario()">
+          Limpar
+        </button>
+  
+        <button
+          *ngIf="idEdicao !== null"
+          type="button"
+          class="secundario"
+          (click)="cancelarEdicao()"
+        >
+          Cancelar edição
+        </button>
+      </div>
+    </form>
+  
+    <div class="consulta">
+      <h3>Consultar produto por ID</h3>
+  
+      <div class="consulta-campos">
+        <input
+          type="number"
+          name="idBusca"
+          [(ngModel)]="idBusca"
+          placeholder="Digite o ID"
+          min="1"
+        >
+  
+        <button type="button" (click)="consultarPorId()">
+          Consultar
+        </button>
+  
+        <button type="button" class="secundario" (click)="voltarLista()">
+          Listar todos
+        </button>
+      </div>
+    </div>
+  
+    <h3>Produtos cadastrados</h3>
+  
+    <p *ngIf="carregando">Carregando produtos...</p>
+  
+    <div class="tabela-container" *ngIf="!carregando">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Preço do item</th>
+            <th>Preço de venda</th>
+            <th>Unidade</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let produto of produtos">
+            <td>{{ produto.idItem }}</td>
+            <td>{{ produto.item }}</td>
+            <td>{{ produto.idcategoria }}</td>
+            <td>{{ produto.precoItem | currency:'BRL' }}</td>
+            <td>{{ produto.precoVenda | currency:'BRL' }}</td>
+            <td>{{ produto.unidade }}</td>
+            <td>{{ produto.ativoProdutoServico === 'S' ? 'Ativo' : 'Inativo' }}</td>
+            <td class="acoes">
+              <button type="button" (click)="editar(produto)">
+                Editar
+              </button>
+  
+              <button
+                type="button"
+                class="excluir"
+                (click)="excluir(produto.idItem)"
+              >
+                Excluir
+              </button>
+            </td>
+          </tr>
+  
+          <tr *ngIf="produtos.length === 0">
+            <td colspan="8">Nenhum produto cadastrado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

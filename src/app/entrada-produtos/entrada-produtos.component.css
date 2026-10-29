@@ -1,0 +1,189 @@
+
+.container {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 30px;
+    background-color: #fff7fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(181, 107, 136, 0.15);
+    color: #4a3540;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #b56b88;
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
+  
+  h3 {
+    color: #b56b88;
+    margin: 25px 0 18px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px;
+    background-color: #ffffff;
+    border: 1px solid #f0bfd0;
+    border-radius: 10px;
+  }
+  
+  label {
+    font-weight: 600;
+    margin-top: 5px;
+  }
+  
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #e2b2c3;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #4a3540;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #b56b88;
+    box-shadow: 0 0 4px rgba(181, 107, 136, 0.3);
+  }
+  
+  input[readonly] {
+    background-color: #f7edf1;
+    cursor: not-allowed;
+  }
+  
+  .botoes,
+  .consulta-campos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  button {
+    padding: 10px 17px;
+    border: none;
+    border-radius: 6px;
+    background-color: #b56b88;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #984d6b;
+  }
+  
+  button.secundario {
+    background-color: #e8c3d0;
+    color: #603d4b;
+  }
+  
+  button.secundario:hover {
+    background-color: #d9a8bb;
+  }
+  
+  .consulta {
+    margin: 30px 0;
+    padding: 22px;
+    background-color: #ffffff;
+    border: 1px solid #f0bfd0;
+    border-radius: 10px;
+  }
+  
+  .consulta-campos input {
+    flex: 1;
+    min-width: 150px;
+  }
+  
+  .mensagem {
+    padding: 12px;
+    border-radius: 6px;
+    background-color: #e5f5e8;
+    color: #276738;
+  }
+  
+  .erro {
+    padding: 12px;
+    border-radius: 6px;
+    background-color: #fde8e8;
+    color: #a52b35;
+  }
+  
+  .tabela-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 15px;
+    border-radius: 8px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+  }
+  
+  th,
+  td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #f0d5df;
+  }
+  
+  th {
+    background-color: #f0bfd0;
+    color: #603d4b;
+    white-space: nowrap;
+  }
+  
+  tbody tr:hover {
+    background-color: #fff0f5;
+  }
+  
+  .acoes {
+    display: flex;
+    gap: 8px;
+  }
+  
+  button.excluir {
+    background-color: #c94f63;
+  }
+  
+  button.excluir:hover {
+    background-color: #a93649;
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      margin: 15px;
+      padding: 15px;
+    }
+  
+    form,
+    .consulta {
+      padding: 15px;
+    }
+  
+    .botoes,
+    .consulta-campos {
+      flex-direction: column;
+    }
+  
+    .botoes button,
+    .consulta-campos button {
+      width: 100%;
+    }
+  }
+  
