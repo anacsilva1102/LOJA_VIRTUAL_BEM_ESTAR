@@ -1,156 +1,164 @@
-
 <div class="container">
+  <div class="cabecalho">
     <h2>Entrada de Produtos</h2>
-  
-    <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
-    <p class="erro" *ngIf="erro">{{ erro }}</p>
-  
-    <form (ngSubmit)="salvarEntrada()">
-      <h3>{{ idEdicao !== null ? 'Editar Entrada' : 'Registrar Entrada' }}</h3>
-  
-      <label for="idItem">ID do produto</label>
-      <input
-        id="idItem"
-        type="number"
-        name="idItem"
-        [(ngModel)]="idItem"
-        min="1"
-        [readonly]="idEdicao !== null"
-        required
+
+    <button
+      type="button"
+      class="botao-voltar"
+      routerLink="/painel-administrativo">
+      Voltar
+    </button>
+  </div>
+
+  <p class="mensagem" *ngIf="mensagem">{{ mensagem }}</p>
+  <p class="erro" *ngIf="erro">{{ erro }}</p>
+
+  <form (ngSubmit)="salvarEntrada()">
+    <h3>{{ idEdicao !== null ? 'Editar Entrada' : 'Registrar Entrada' }}</h3>
+
+    <label for="idItem">ID do produto</label>
+    <input
+      id="idItem"
+      type="number"
+      name="idItem"
+      [(ngModel)]="idItem"
+      min="1"
+      [readonly]="idEdicao !== null"
+      required
+    >
+
+    <label for="dataEntradaProduto">Data da entrada</label>
+    <input
+      id="dataEntradaProduto"
+      type="date"
+      name="dataEntradaProduto"
+      [(ngModel)]="dataEntradaProduto"
+      required
+    >
+
+    <label for="quantidadeEntrada">Quantidade recebida</label>
+    <input
+      id="quantidadeEntrada"
+      type="number"
+      name="quantidadeEntrada"
+      [(ngModel)]="quantidadeEntrada"
+      min="1"
+      step="1"
+      required
+    >
+
+    <label for="unidade">Unidade</label>
+    <input
+      id="unidade"
+      type="text"
+      name="unidade"
+      [(ngModel)]="unidade"
+      maxlength="10"
+      placeholder="Ex.: unidade, caixa"
+      required
+    >
+
+    <label for="valorUnitarioEntrada">Valor unitário da entrada (R$)</label>
+    <input
+      id="valorUnitarioEntrada"
+      type="number"
+      name="valorUnitarioEntrada"
+      [(ngModel)]="valorUnitarioEntrada"
+      min="0.01"
+      step="0.01"
+      required
+    >
+
+    <div class="botoes">
+      <button type="submit">
+        {{ idEdicao !== null ? 'Salvar alterações' : 'Registrar entrada' }}
+      </button>
+
+      <button type="button" class="secundario" (click)="limparFormulario()">
+        Limpar
+      </button>
+
+      <button
+        *ngIf="idEdicao !== null"
+        type="button"
+        class="secundario"
+        (click)="cancelarEdicao()"
       >
-  
-      <label for="dataEntradaProduto">Data da entrada</label>
-      <input
-        id="dataEntradaProduto"
-        type="date"
-        name="dataEntradaProduto"
-        [(ngModel)]="dataEntradaProduto"
-        required
-      >
-  
-      <label for="quantidadeEntrada">Quantidade recebida</label>
-      <input
-        id="quantidadeEntrada"
-        type="number"
-        name="quantidadeEntrada"
-        [(ngModel)]="quantidadeEntrada"
-        min="1"
-        step="1"
-        required
-      >
-  
-      <label for="unidade">Unidade</label>
-      <input
-        id="unidade"
-        type="text"
-        name="unidade"
-        [(ngModel)]="unidade"
-        maxlength="10"
-        placeholder="Ex.: unidade, caixa"
-        required
-      >
-  
-      <label for="valorUnitarioEntrada">Valor unitário da entrada (R$)</label>
-      <input
-        id="valorUnitarioEntrada"
-        type="number"
-        name="valorUnitarioEntrada"
-        [(ngModel)]="valorUnitarioEntrada"
-        min="0.01"
-        step="0.01"
-        required
-      >
-  
-      <div class="botoes">
-        <button type="submit">
-          {{ idEdicao !== null ? 'Salvar alterações' : 'Registrar entrada' }}
-        </button>
-  
-        <button type="button" class="secundario" (click)="limparFormulario()">
-          Limpar
-        </button>
-  
-        <button
-          *ngIf="idEdicao !== null"
-          type="button"
-          class="secundario"
-          (click)="cancelarEdicao()"
-        >
-          Cancelar edição
-        </button>
-      </div>
-    </form>
-  
-    <div class="consulta">
-      <h3>Consultar entrada por ID</h3>
-  
-      <div class="consulta-campos">
-        <input
-          type="number"
-          name="idBusca"
-          [(ngModel)]="idBusca"
-          placeholder="Digite o ID da entrada"
-          min="1"
-        >
-  
-        <button type="button" (click)="consultarPorId()">
-          Consultar
-        </button>
-  
-        <button type="button" class="secundario" (click)="voltarLista()">
-          Listar todas
-        </button>
-      </div>
+        Cancelar edição
+      </button>
     </div>
-  
-    <h3>Entradas registradas</h3>
-  
-    <p *ngIf="carregando">Carregando entradas...</p>
-  
-    <div class="tabela-container" *ngIf="!carregando">
-      <table>
-        <thead>
-          <tr>
-            <th>ID da entrada</th>
-            <th>ID do produto</th>
-            <th>Data</th>
-            <th>Quantidade</th>
-            <th>Unidade</th>
-            <th>Valor unitário</th>
-            <th>Estoque atual</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-  
-        <tbody>
-          <tr *ngFor="let entrada of entradas">
-            <td>{{ entrada.idEntradaProduto }}</td>
-            <td>{{ entrada.idItem }}</td>
-            <td>{{ entrada.dataEntradaProduto | date:'dd/MM/yyyy' }}</td>
-            <td>{{ entrada.quantidadeEntrada }}</td>
-            <td>{{ entrada.unidade }}</td>
-            <td>{{ entrada.valorUnitarioEntrada | currency:'BRL' }}</td>
-            <td>{{ entrada.quantidadeEstoque }}</td>
-            <td class="acoes">
-              <button type="button" (click)="editar(entrada)">
-                Editar
-              </button>
-  
-              <button
-                type="button"
-                class="excluir"
-                (click)="excluir(entrada.idEntradaProduto)"
-              >
-                Excluir
-              </button>
-            </td>
-          </tr>
-  
-          <tr *ngIf="entradas.length === 0">
-            <td colspan="8">Nenhuma entrada registrada.</td>
-          </tr>
-        </tbody>
-      </table>
+  </form>
+
+  <div class="consulta">
+    <h3>Consultar entrada por ID</h3>
+
+    <div class="consulta-campos">
+      <input
+        type="number"
+        name="idBusca"
+        [(ngModel)]="idBusca"
+        placeholder="Digite o ID da entrada"
+        min="1"
+      >
+
+      <button type="button" (click)="consultarPorId()">
+        Consultar
+      </button>
+
+      <button type="button" class="secundario" (click)="voltarLista()">
+        Listar todas
+      </button>
     </div>
   </div>
-  
+
+  <h3>Entradas registradas</h3>
+
+  <p *ngIf="carregando">Carregando entradas...</p>
+
+  <div class="tabela-container" *ngIf="!carregando">
+    <table>
+      <thead>
+        <tr>
+          <th>ID da entrada</th>
+          <th>ID do produto</th>
+          <th>Data</th>
+          <th>Quantidade</th>
+          <th>Unidade</th>
+          <th>Valor unitário</th>
+          <th>Estoque atual</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let entrada of entradas">
+          <td>{{ entrada.idEntradaProduto }}</td>
+          <td>{{ entrada.idItem }}</td>
+          <td>{{ entrada.dataEntradaProduto | date:'dd/MM/yyyy' }}</td>
+          <td>{{ entrada.quantidadeEntrada }}</td>
+          <td>{{ entrada.unidade }}</td>
+          <td>{{ entrada.valorUnitarioEntrada | currency:'BRL' }}</td>
+          <td>{{ entrada.quantidadeEstoque }}</td>
+
+          <td class="acoes">
+            <button type="button" (click)="editar(entrada)">
+              Editar
+            </button>
+
+            <button
+              type="button"
+              class="excluir"
+              (click)="excluir(entrada.idEntradaProduto)"
+            >
+              Excluir
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="entradas.length === 0">
+          <td colspan="8">Nenhuma entrada registrada.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

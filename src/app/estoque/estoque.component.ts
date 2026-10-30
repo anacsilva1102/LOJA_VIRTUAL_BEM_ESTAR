@@ -1,12 +1,12 @@
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Estoque, EstoqueService } from '../services/estoque.service';
 
 @Component({
   selector: 'app-estoque',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './estoque.component.html',
   styleUrl: './estoque.component.css'
 })

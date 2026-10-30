@@ -1,7 +1,7 @@
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { PedidoService } from '../services/pedido.service';
 
 interface ItemPedido {
@@ -25,7 +25,7 @@ interface Pedido {
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.css'
 })

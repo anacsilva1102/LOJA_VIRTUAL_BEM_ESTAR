@@ -1,40 +1,49 @@
-
 <div class="container">
+  <div class="cabecalho">
     <h2>Estoque</h2>
-  
-    <p class="erro" *ngIf="erro">{{ erro }}</p>
-  
-    <div class="topo">
-      <p>Consulte a quantidade disponível de cada produto.</p>
-      <button type="button" (click)="listarEstoques()">Atualizar estoque</button>
-    </div>
-  
-    <p *ngIf="carregando">Carregando estoque...</p>
-  
-    <div class="tabela-container" *ngIf="!carregando">
-      <table>
-        <thead>
-          <tr>
-            <th>ID do produto</th>
-            <th>Quantidade em estoque</th>
-            <th>Disponibilidade</th>
-          </tr>
-        </thead>
-  
-        <tbody>
-          <tr *ngFor="let estoque of estoques">
-            <td>{{ estoque.idItem }}</td>
-            <td>{{ estoque.quantidadeEstoque }}</td>
-            <td>
-              {{ estoque.quantidadeEstoque > 0 ? 'Disponível' : 'Sem estoque' }}
-            </td>
-          </tr>
-  
-          <tr *ngIf="estoques.length === 0 && !erro && !carregando">
-            <td colspan="3">Nenhum estoque cadastrado.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+
+    <button
+      type="button"
+      class="botao-voltar"
+      routerLink="/painel-administrativo">
+      Voltar
+    </button>
   </div>
-  
+
+  <p class="erro" *ngIf="erro">{{ erro }}</p>
+
+  <div class="topo">
+    <p>Consulte a quantidade disponível de cada produto.</p>
+    <button type="button" (click)="listarEstoques()">
+      Atualizar estoque
+    </button>
+  </div>
+
+  <p *ngIf="carregando">Carregando estoque...</p>
+
+  <div class="tabela-container" *ngIf="!carregando">
+    <table>
+      <thead>
+        <tr>
+          <th>ID do produto</th>
+          <th>Quantidade em estoque</th>
+          <th>Disponibilidade</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let estoque of estoques">
+          <td>{{ estoque.idItem }}</td>
+          <td>{{ estoque.quantidadeEstoque }}</td>
+          <td>
+            {{ estoque.quantidadeEstoque > 0 ? 'Disponível' : 'Sem estoque' }}
+          </td>
+        </tr>
+
+        <tr *ngIf="estoques.length === 0 && !erro && !carregando">
+          <td colspan="3">Nenhum estoque cadastrado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
